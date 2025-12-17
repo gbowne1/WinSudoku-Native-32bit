@@ -44,6 +44,8 @@ int g_SelectedCol = -1;
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 void DrawGame(HWND hwnd, HDC hdc);
 void InitializeGame();
+bool IsSafe(int row, int col, int num);
+bool IsSolved();
 
 // --- Initialization and Utility Functions ---
 
