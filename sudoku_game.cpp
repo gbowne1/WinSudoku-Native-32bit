@@ -57,6 +57,56 @@ void InitializeGame()
     }
 }
 
+// Checks if a 'num' can be legally placed at g_Board[row][col]
+bool IsSafe(int row, int col, int num) {
+    // 1. Check Row
+    for (int c = 0; c < 9; ++c) {
+        if (g_Board[row][c] == num) {
+            return false;
+        }
+    }
+
+    // 2. Check Column
+    for (int r = 0; r < 9; ++r) {
+        if (g_Board[r][col] == num) {
+            return false;
+        }
+    }
+
+    // 3. Check 3x3 Box
+    int boxStartRow = row - row % 3;
+    int boxStartCol = col - col % 3;
+    for (int r = 0; r < 3; ++r) {
+        for (int c = 0; c < 3; ++c) {
+            if (g_Board[boxStartRow + r][boxStartCol + c] == num) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+// Checks if the entire board is solved
+bool IsSolved() {
+    for (int r = 0; r < 9; ++r) {
+        for (int c = 0; c < 9; ++c) {
+            if (g_Board[r][c] == 0) {
+                return false; // Not complete
+            }
+            // Temporarily remove the current value to check its validity
+            int temp = g_Board[r][c];
+            g_Board[r][c] = 0;
+            if (!IsSafe(r, c, temp)) {
+                g_Board[r][c] = temp; // Restore value
+                return false; // Invalid entry
+            }
+            g_Board[r][c] = temp; // Restore value
+        }
+    }
+    return true; // Complete and valid
+}
+
 // --- Drawing Function (GDI) ---
 
 void DrawGame(HWND hwnd, HDC hdc)
