@@ -12,7 +12,7 @@
 // Window properties
 const TCHAR CLASS_NAME[] = _T("SudokuWin32Class");
 const TCHAR WINDOW_TITLE[] = _T("Classic Sudoku Puzzle (Win32)");
-i6
+
 // Board dimensions and drawing constants
 const int CELL_SIZE = 40;       // Size of one cell in pixels
 const int BOARD_SIZE = 9 * CELL_SIZE; // Total width/height of the grid
